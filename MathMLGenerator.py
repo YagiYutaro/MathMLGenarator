@@ -15,6 +15,16 @@ def brackets(stack):
     for i,char in enumerate(reversed(stack)):
         if char == "(":
             return len(stack)-(i+1)
+
+def checkFunction(operand,stack_operator):
+    if operand=="-":
+        stack_operator.append("munis")
+        operand=""
+    elif operand=="exp":
+        stack_operator.append("exp")
+        operand=""
+    return operand
+
 def makeRPN(exp):
     stack_operator = []
     operand = ""
@@ -22,12 +32,7 @@ def makeRPN(exp):
     str_exp = list(exp)
     for char in str_exp:
         if char == "(":
-            if operand=="-":
-                stack_operator.append("minus")
-                operand = ""
-            if operand == "exp":
-                stack_operator.append("exp")
-                operand=""
+            operand = checkFunction(operand,stack_operator)
             stack_operator.append(char)
         elif char == ")":
             if len(operand) != 0:
