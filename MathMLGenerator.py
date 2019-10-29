@@ -114,6 +114,7 @@ def makeTree(lst_RPN):
             minus = ""
         #print(stack)
     return stack[0]
+"""
 #数式部生成
 with open("input_exp.txt") as f: #元数式読み込み
     vec_exp = [s.strip() for s in f.readlines()]
@@ -147,18 +148,18 @@ with open("test.cellml", mode='w') as f:
         f.write('<variable name="'+var+'"/>\n')
     f.write(mathML)
     f.write("</component>")
-""" #debug
+"""
+#debug
 #exp = "y=10+20*30-40+50"
 #exp = "Epac2=cAMPtot/(0.02+cAMPtot)"
 #alphap=1/(8.23*exp(-(Vm)/6.5)+1.03*exp(-(Vm)/500))
 #exp = "alphaq=1/(1142857*exp(-(-Vm+VshiftKDr)/10)+10857*exp(-(-Vm+VshiftKDr)/3000))"
-exp = "alphaq=1/(1142857*exp(-(-Vm+VshiftKDr)/10)+10857*exp(-(-Vm+VshiftKDr)/3000))"
+exp = "Caer=yini4+(fer/2/volER)*(Cm/F*(Vm-yini0)-((Nai-yini1)+(Ki-yini2))*(voli+volnrs)-2*((Canrs-yini20)*volnrs/fi+(Cai-yini3)*voli/fi))"
 exp = exp.replace(' ','')
 RPN = makeRPN(exp)
 print(RPN)
 mathML = "<math>\n<apply>\n"
-mathML += makeTree2(RPN)
+mathML += makeTree(RPN)
 mathML += "</apply>\n</math>\n"
 with open("test.xml", mode='w') as f:
     f.write(mathML)
-"""
